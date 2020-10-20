@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_10sdp"
+    android:id="@+id/productCard"
+    android:backgroundTint="@android:color/white"
+    android:elevation="@dimen/_6sdp"
+    android:layout_marginBottom="@dimen/_10sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/productImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/clothpic"/>
+        <TextView
+            android:id="@+id/productName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum"
+            android:textColor="@color/black"
+            android:fontFamily="@font/ubuntu_bold"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:textSize="@dimen/_18ssp"/>
+        <TextView
+            android:id="@+id/productDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish."
+            android:textColor="@color/black"
+            android:fontFamily="@font/ubuntu_regular"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:textSize="@dimen/_12ssp"
+            android:maxLines="5"/>
+        <TextView
+            android:id="@+id/productPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu_medium"
+            android:text="300 rs."
+            android:textColor="@android:color/holo_red_light"
+            android:textSize="@dimen/_16ssp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"/>
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

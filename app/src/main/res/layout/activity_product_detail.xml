@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activities.ProductDetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="@dimen/_25ssp"
+            android:layout_height="@dimen/_25sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/_3sdp"
+            android:elevation="@dimen/_6sdp"
+            android:onClick="imageClick"
+            android:src="@drawable/ic_cart"
+            app:tint="@color/cartColor" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary">
+
+                    <com.smarteist.autoimageslider.SliderView
+                        android:id="@+id/detailProductImages"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_400sdp"
+                        app:sliderAnimationDuration="600"
+                        app:sliderAutoCycleDirection="right"
+                        app:sliderAutoCycleEnabled="true"
+                        app:sliderIndicatorAnimationDuration="600"
+                        app:sliderIndicatorGravity="center_horizontal|bottom"
+                        app:sliderIndicatorMargin="15dp"
+                        app:sliderIndicatorMarginBottom="@dimen/_35sdp"
+                        app:sliderIndicatorOrientation="horizontal"
+                        app:sliderIndicatorPadding="3dp"
+                        app:sliderIndicatorRadius="2dp"
+                        app:sliderIndicatorSelectedColor="@color/colorPrimaryDark"
+                        app:sliderIndicatorUnselectedColor="@color/colorPrimary"
+                        app:sliderScrollTimeInSec="3"
+                        app:sliderStartAutoCycle="true" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_alignBottom="@id/detailProductImages"
+                        android:background="@drawable/view_white" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_minus3sdp"
+                    android:background="@color/white"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/_50sdp">
+
+                    <TextView
+                        android:id="@+id/detailProductName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_bold"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:text="Men's Lower"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_18ssp" />
+
+                    <TextView
+                        android:id="@+id/detailProductBrand"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:text="Realme"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="@dimen/_15ssp" />
+
+                    <TextView
+                        android:id="@+id/detailProductDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:text="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_12ssp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/colors"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:textColor="@color/cartColor"
+                        android:textSize="@dimen/_12ssp"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:layout_marginTop="@dimen/_5sdp"/>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/detailProductColorsRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/_5sdp"/>
+
+                    <TextView
+                        android:id="@+id/detailProductPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/ubuntu_medium"
+                        android:paddingHorizontal="@dimen/_5sdp"
+                        android:text="999 Rs."
+                        android:textColor="@color/priceColor"
+                        android:textSize="@dimen/_15ssp" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addToCartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:backgroundTint="@color/cartColor"
+            android:text="@string/add_to_cart"
+            android:textColor="@color/white" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buyNowButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_toEndOf="@id/addToCartButton"
+            android:backgroundTint="@color/priceColor"
+            android:text="@string/buy_now"
+            android:textColor="@color/white" />
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
