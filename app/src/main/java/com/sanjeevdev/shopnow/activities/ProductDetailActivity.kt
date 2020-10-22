@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sanjeevdev.shopnow.R
 import com.sanjeevdev.shopnow.adapter.ImagesAdapter
@@ -30,7 +31,17 @@ class ProductDetailActivity : AppCompatActivity() {
         getDataAsynTask.execute(db)
 
         addToCartButton.setOnClickListener {
-            startActivity(Intent(this,CartActivity::class.java))
+            val intent = Intent(this,CartActivity::class.java)
+            if (FirebaseAuth.getInstance().currentUser == null){
+                intent.apply {
+                    putExtra(Constants.HAS_ACCOUNT,false)
+                }
+            }else{
+                intent.apply {
+                    putExtra(Constants.HAS_ACCOUNT,true)
+                }
+            }
+            startActivity(intent)
         }
     }
 

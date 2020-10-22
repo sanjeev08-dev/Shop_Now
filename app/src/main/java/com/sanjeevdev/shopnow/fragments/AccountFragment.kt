@@ -11,7 +11,11 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.radiobutton.MaterialRadioButton
 import com.sanjeevdev.shopnow.R
-import kotlinx.android.synthetic.main.fragment_account.*
+import com.wajahatkarim3.easyvalidation.core.view_ktx.minLength
+import com.wajahatkarim3.easyvalidation.core.view_ktx.nonEmpty
+import com.wajahatkarim3.easyvalidation.core.view_ktx.onlyNumbers
+import com.wajahatkarim3.easyvalidation.core.view_ktx.validEmail
+import kotlinx.android.synthetic.main.fragment_account.view.*
 
 class AccountFragment : Fragment() {
     override fun onCreateView(
@@ -27,28 +31,121 @@ class AccountFragment : Fragment() {
         val createAccountLayout = view.findViewById<LinearLayout>(R.id.createAccountLayout)!!
         val accountRG = view.findViewById<RadioGroup>(R.id.accountRG)!!
 
-        if (R.id.loginAccountRB == accountRG.checkedRadioButtonId){
+        if (R.id.loginAccountRB == accountRG.checkedRadioButtonId) {
             loginAccountLayout.visibility = View.VISIBLE
             createAccountLayout.visibility = View.GONE
-            createAccountRB.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext,R.color.white))
-            loginAccountRB.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext,R.color.dividerColor))
+            createAccountRB.setBackgroundColor(
+                ContextCompat.getColor(
+                    activity!!.applicationContext,
+                    R.color.white
+                )
+            )
+            loginAccountRB.setBackgroundColor(
+                ContextCompat.getColor(
+                    activity!!.applicationContext,
+                    R.color.dividerColor
+                )
+            )
         }
         accountRG.setOnCheckedChangeListener { radioGroup, i ->
-            when (i){
+            when (i) {
                 R.id.loginAccountRB -> {
                     loginAccountLayout.visibility = View.VISIBLE
                     createAccountLayout.visibility = View.GONE
-                    createAccountRB.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext,R.color.white))
-                    loginAccountRB.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext,R.color.dividerColor))
+                    createAccountRB.setBackgroundColor(
+                        ContextCompat.getColor(
+                            activity!!.applicationContext,
+                            R.color.white
+                        )
+                    )
+                    loginAccountRB.setBackgroundColor(
+                        ContextCompat.getColor(
+                            activity!!.applicationContext,
+                            R.color.dividerColor
+                        )
+                    )
                 }
-                R.id.createAccountRB ->{
+                R.id.createAccountRB -> {
                     loginAccountLayout.visibility = View.GONE
                     createAccountLayout.visibility = View.VISIBLE
-                    loginAccountRB.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext,R.color.white))
-                    createAccountRB.setBackgroundColor(ContextCompat.getColor(activity!!.applicationContext,R.color.dividerColor))
+                    loginAccountRB.setBackgroundColor(
+                        ContextCompat.getColor(
+                            activity!!.applicationContext,
+                            R.color.white
+                        )
+                    )
+                    createAccountRB.setBackgroundColor(
+                        ContextCompat.getColor(
+                            activity!!.applicationContext,
+                            R.color.dividerColor
+                        )
+                    )
                 }
+            }
+        }
+
+        view.createAccountButton.setOnClickListener {
+            val customerName = view.customerNameET.text.toString().trim()
+            val customerPhone = view.customerNumberET.text.toString().trim()
+            val customerEmail = view.customerEmailET.text.toString().trim()
+            val customerAddress = view.customerAddressET.text.toString().trim()
+
+            if (!customerName.nonEmpty {
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Customer Name $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    view.customerNameET.requestFocus()
+                } || !customerPhone.nonEmpty {
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Customer Phone $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    view.customerNumberET.requestFocus()
+                } || !customerPhone.onlyNumbers {
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Customer Phone $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    view.customerNumberET.requestFocus()
+                } || !customerPhone.minLength(10, callback = {
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Customer Phone $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    view.customerNumberET.requestFocus()
+                }) || !customerEmail.nonEmpty {
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Customer Email $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    view.customerEmailET.requestFocus()
+                } || !customerEmail.validEmail {
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Customer Email $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    view.customerEmailET.requestFocus()
+                } || !customerAddress.nonEmpty {
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Customer Address $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    view.customerAddressET.requestFocus()
+                }) {
+            } else {
+                Toast.makeText(activity!!.applicationContext, "All right", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
         return view
     }
+
 }

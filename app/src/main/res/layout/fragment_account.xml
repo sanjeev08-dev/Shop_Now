@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/dividerColor"
-                android:visibility="gone">
+                android:visibility="visible">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/customerNameET"
                     android:layout_width="match_parent"
@@ -62,22 +62,44 @@
                     android:textSize="@dimen/_13ssp"
                     android:padding="@dimen/_6sdp"
                     android:layout_margin="@dimen/_6sdp" />
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/customerNumberET"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:background="@null"
-                    android:fontFamily="@font/ubuntu_regular"
-                    android:hint="@string/mobile_number"
-                    android:imeOptions="actionNext"
-                    android:importantForAutofill="no"
-                    android:includeFontPadding="false"
-                    android:inputType="number"
-                    android:textColor="@color/black"
-                    android:textColorHint="@android:color/holo_blue_light"
-                    android:textSize="@dimen/_13ssp"
-                    android:padding="@dimen/_6sdp"
-                    android:layout_margin="@dimen/_6sdp"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="+91"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@null"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:hint="@string/name"
+                        android:importantForAutofill="no"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/holo_blue_light"
+                        android:textSize="@dimen/_13ssp"
+                        android:padding="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_6sdp"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/customerNumberET"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@null"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:hint="@string/mobile_number"
+                        android:imeOptions="actionNext"
+                        android:importantForAutofill="no"
+                        android:includeFontPadding="false"
+                        android:inputType="phone"
+                        android:textColor="@color/black"
+                        android:maxLength="10"
+                        android:textColorHint="@android:color/holo_blue_light"
+                        android:textSize="@dimen/_13ssp"
+                        android:padding="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"/>
+                </LinearLayout>
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/customerEmailET"
                     android:layout_width="match_parent"
@@ -95,28 +117,29 @@
                     android:padding="@dimen/_6sdp"
                     android:layout_margin="@dimen/_6sdp"/>
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/customerPasswordET"
+                    android:id="@+id/customerAddressET"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp"
                     android:background="@null"
                     android:fontFamily="@font/ubuntu_regular"
-                    android:hint="Password"
+                    android:hint="Address"
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:includeFontPadding="false"
-                    android:inputType="textPassword"
+                    android:inputType="text"
                     android:textColor="@color/black"
                     android:textColorHint="@android:color/holo_blue_light"
                     android:textSize="@dimen/_13ssp"
                     android:padding="@dimen/_6sdp"
                     android:layout_margin="@dimen/_6sdp" />
-                <TextView
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/createAccountButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/password_must_be_at_least_6_characters"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center"
-                    android:layout_margin="@dimen/_6sdp"/>
+                    android:text="@string/create_account"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
             </LinearLayout>
             <com.google.android.material.radiobutton.MaterialRadioButton
                 android:id="@+id/loginAccountRB"
@@ -143,12 +166,20 @@
                     android:imeOptions="actionNext"
                     android:importantForAutofill="no"
                     android:includeFontPadding="false"
-                    android:inputType="textPassword"
+                    android:inputType="phone"
                     android:textColor="@color/black"
                     android:textColorHint="@android:color/holo_blue_light"
                     android:textSize="@dimen/_13ssp"
                     android:padding="@dimen/_6sdp"
                     android:layout_margin="@dimen/_6sdp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/loginAccountButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"/>
             </LinearLayout>
         </RadioGroup>
     </com.google.android.material.card.MaterialCardView>

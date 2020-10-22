@@ -16,4 +16,6 @@ object Constants {
     val QUANTITY = "quantity"
     val CATEGORY = "category"
     val MENU_ITEM = "menuItem"
+
+    val HAS_ACCOUNT = "hasAccount"
 }
