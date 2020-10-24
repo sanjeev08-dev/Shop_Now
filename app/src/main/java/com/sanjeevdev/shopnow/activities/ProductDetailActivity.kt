@@ -31,7 +31,7 @@ class ProductDetailActivity : AppCompatActivity() {
         getDataAsynTask.execute(db)
 
         addToCartButton.setOnClickListener {
-            val intent = Intent(this,CartActivity::class.java)
+            val intent = Intent(this,AccountActivity::class.java)
             if (FirebaseAuth.getInstance().currentUser == null){
                 intent.apply {
                     putExtra(Constants.HAS_ACCOUNT,false)

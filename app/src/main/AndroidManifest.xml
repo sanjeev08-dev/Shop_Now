@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activities.CartActivity"></activity>
-        <activity android:name=".activities.ProductDetailActivity"></activity>
+        <activity android:name=".activities.AccountActivity" />
+        <activity android:name=".activities.ProductDetailActivity" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.OnBoardingActivity" />
         <activity android:name=".activities.SplashActivity">

@@ -1,6 +1,7 @@
 package com.sanjeevdev.shopnow.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,12 +11,17 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.radiobutton.MaterialRadioButton
+import com.google.firebase.FirebaseException
+import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.auth.PhoneAuthProvider
 import com.sanjeevdev.shopnow.R
+import com.sanjeevdev.shopnow.utils.Constants
 import com.wajahatkarim3.easyvalidation.core.view_ktx.minLength
 import com.wajahatkarim3.easyvalidation.core.view_ktx.nonEmpty
 import com.wajahatkarim3.easyvalidation.core.view_ktx.onlyNumbers
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validEmail
 import kotlinx.android.synthetic.main.fragment_account.view.*
+import java.util.concurrent.TimeUnit
 
 class AccountFragment : Fragment() {
     override fun onCreateView(
@@ -141,8 +147,44 @@ class AccountFragment : Fragment() {
                     view.customerAddressET.requestFocus()
                 }) {
             } else {
-                Toast.makeText(activity!!.applicationContext, "All right", Toast.LENGTH_SHORT)
-                    .show()
+                val phoneNumber = "+91$customerPhone"
+                view.createAccountButton.startAnimation()
+                PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                    phoneNumber,
+                    60,
+                    TimeUnit.SECONDS,
+                    activity!!,
+                    object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                        override fun onVerificationCompleted(p0: PhoneAuthCredential) {
+                            view.createAccountButton.revertAnimation()
+                        }
+
+                        override fun onVerificationFailed(p0: FirebaseException) {
+                            Toast.makeText(activity!!.applicationContext, p0.message, Toast.LENGTH_SHORT).show()
+                            Log.e("My Error",p0.localizedMessage)
+                            view.createAccountButton.revertAnimation()
+                        }
+
+                        override fun onCodeSent(
+                            code: String,
+                            p1: PhoneAuthProvider.ForceResendingToken
+                        ) {
+                            val otpFragment = OTPFragment()
+                            val args = Bundle()
+                            args.putString(Constants.CUSTOMER_NAME,customerName)
+                            args.putString(Constants.CUSTOMER_PHONE,customerPhone)
+                            args.putString(Constants.CUSTOMER_EMAIL,customerEmail)
+                            args.putString(Constants.CUSTOMER_ADDRESS,customerAddress)
+                            args.putString(Constants.VERIFICATION_ID,code)
+                            otpFragment.arguments = args
+                            view.createAccountButton.revertAnimation()
+                            activity!!.supportFragmentManager.beginTransaction().replace(R.id.cartContainer,otpFragment,"Fragment Open").commit()
+
+                        }
+                    }
+                )
+
+
             }
         }
         return view

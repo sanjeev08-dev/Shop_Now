@@ -18,4 +18,12 @@ object Constants {
     val MENU_ITEM = "menuItem"
 
     val HAS_ACCOUNT = "hasAccount"
+
+    val CUSTOMER_NAME = "customerName"
+    val CUSTOMER_PHONE = "customerPhone"
+    val CUSTOMER_EMAIL = "customerEmail"
+    val CUSTOMER_ADDRESS = "customerAddress"
+    val VERIFICATION_ID = "otp"
+
+    val CUSTOMER_COLLECTION = "Customers"
 }
