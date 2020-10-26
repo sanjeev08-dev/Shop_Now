@@ -1,14 +1,18 @@
 package com.sanjeevdev.shopnow.activities
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sanjeevdev.shopnow.R
 import com.sanjeevdev.shopnow.adapter.ImagesAdapter
@@ -31,17 +35,23 @@ class ProductDetailActivity : AppCompatActivity() {
         getDataAsynTask.execute(db)
 
         addToCartButton.setOnClickListener {
-            val intent = Intent(this,AccountActivity::class.java)
             if (FirebaseAuth.getInstance().currentUser == null){
-                intent.apply {
-                    putExtra(Constants.HAS_ACCOUNT,false)
-                }
+                startActivity(Intent(this,AccountActivity::class.java))
             }else{
-                intent.apply {
-                    putExtra(Constants.HAS_ACCOUNT,true)
-                }
+                addToCartButton.startAnimation()
+                val userID = FirebaseAuth.getInstance().currentUser!!.uid
+                FirebaseFirestore.getInstance().collection(Constants.CUSTOMER_COLLECTION).document(userID).update(Constants.CART,FieldValue.arrayUnion(intent.getStringExtra(Constants.PRODUCTID)!!))
+                    .addOnSuccessListener {
+                        Toast.makeText(applicationContext, "Added to cart", Toast.LENGTH_SHORT).show()
+                        addToCartButton.revertAnimation()
+                        addToCartButton.background = ContextCompat.getDrawable(applicationContext,R.drawable.progress_button_background)
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
+                        addToCartButton.revertAnimation()
+                        addToCartButton.background = ContextCompat.getDrawable(applicationContext,R.drawable.progress_button_background)
+                    }
             }
-            startActivity(intent)
         }
     }
 

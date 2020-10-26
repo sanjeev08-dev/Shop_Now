@@ -14,6 +14,7 @@ import com.google.android.material.radiobutton.MaterialRadioButton
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
 import com.sanjeevdev.shopnow.R
 import com.sanjeevdev.shopnow.utils.Constants
 import com.wajahatkarim3.easyvalidation.core.view_ktx.minLength
@@ -30,6 +31,8 @@ class AccountFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_account, container, false)!!
+        view.loginAccountButton.saveInitialState()
+        view.createAccountButton.saveInitialState()
 
         val loginAccountRB = view.findViewById<MaterialRadioButton>(R.id.loginAccountRB)!!
         val createAccountRB = view.findViewById<MaterialRadioButton>(R.id.createAccountRB)!!
@@ -147,47 +150,95 @@ class AccountFragment : Fragment() {
                     view.customerAddressET.requestFocus()
                 }) {
             } else {
-                val phoneNumber = "+91$customerPhone"
-                view.createAccountButton.startAnimation()
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                    phoneNumber,
-                    60,
-                    TimeUnit.SECONDS,
-                    activity!!,
-                    object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                        override fun onVerificationCompleted(p0: PhoneAuthCredential) {
-                            view.createAccountButton.revertAnimation()
-                        }
+                verifyNumber(view,customerPhone,customerName,customerEmail,customerAddress)
+            }
+        }
+        view.loginAccountButton.setOnClickListener {
+            val customerPhone = view.customerLoginNumberET.text.toString().trim()
 
-                        override fun onVerificationFailed(p0: FirebaseException) {
-                            Toast.makeText(activity!!.applicationContext, p0.message, Toast.LENGTH_SHORT).show()
-                            Log.e("My Error",p0.localizedMessage)
-                            view.createAccountButton.revertAnimation()
-                        }
-
-                        override fun onCodeSent(
-                            code: String,
-                            p1: PhoneAuthProvider.ForceResendingToken
-                        ) {
-                            val otpFragment = OTPFragment()
-                            val args = Bundle()
-                            args.putString(Constants.CUSTOMER_NAME,customerName)
-                            args.putString(Constants.CUSTOMER_PHONE,customerPhone)
-                            args.putString(Constants.CUSTOMER_EMAIL,customerEmail)
-                            args.putString(Constants.CUSTOMER_ADDRESS,customerAddress)
-                            args.putString(Constants.VERIFICATION_ID,code)
-                            otpFragment.arguments = args
-                            view.createAccountButton.revertAnimation()
-                            activity!!.supportFragmentManager.beginTransaction().replace(R.id.cartContainer,otpFragment,"Fragment Open").commit()
-
+            if (!customerPhone.nonEmpty {
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Customer Phone $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    view.customerNumberET.requestFocus()
+                } || !customerPhone.onlyNumbers {
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Customer Phone $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    view.customerNumberET.requestFocus()
+                } || !customerPhone.minLength(10, callback = {
+                    Toast.makeText(
+                        activity!!.applicationContext,
+                        "Customer Phone $it",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    view.customerNumberET.requestFocus()
+                })) {
+            } else {
+                FirebaseFirestore.getInstance().collection(Constants.CUSTOMER_COLLECTION).whereEqualTo(Constants.CUSTOMER_PHONE,"+91$customerPhone").get()
+                    .addOnCompleteListener {
+                        if (!it.result!!.isEmpty){
+                            verifyNumber(view, customerPhone, "", "", "")
+                        }else{
+                            Toast.makeText(activity!!.applicationContext, "Please create account first!!", Toast.LENGTH_SHORT).show()
                         }
                     }
-                )
-
-
             }
         }
         return view
+    }
+
+    private fun verifyNumber(
+        view: View,
+        customerPhone: String,
+        customerName: String?,
+        customerEmail: String?,
+        customerAddress: String?
+    ) {
+        val phoneNumber = "+91$customerPhone"
+        view.createAccountButton.startAnimation()
+        view.loginAccountButton.startAnimation()
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+            phoneNumber,
+            60,
+            TimeUnit.SECONDS,
+            activity!!,
+            object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                override fun onVerificationCompleted(p0: PhoneAuthCredential) {
+                    view.createAccountButton.revertAnimation()
+                    view.loginAccountButton.revertAnimation()
+                }
+
+                override fun onVerificationFailed(p0: FirebaseException) {
+                    Toast.makeText(activity!!.applicationContext, p0.message, Toast.LENGTH_SHORT).show()
+                    Log.e("My Error",p0.localizedMessage)
+                    view.createAccountButton.revertAnimation()
+                    view.loginAccountButton.revertAnimation()
+                }
+
+                override fun onCodeSent(
+                    code: String,
+                    p1: PhoneAuthProvider.ForceResendingToken
+                ) {
+                    val otpFragment = OTPFragment()
+                    val args = Bundle()
+                    args.putString(Constants.CUSTOMER_NAME,customerName)
+                    args.putString(Constants.CUSTOMER_PHONE,customerPhone)
+                    args.putString(Constants.CUSTOMER_EMAIL,customerEmail)
+                    args.putString(Constants.CUSTOMER_ADDRESS,customerAddress)
+                    args.putString(Constants.VERIFICATION_ID,code)
+                    otpFragment.arguments = args
+                    view.createAccountButton.revertAnimation()
+                    view.loginAccountButton.revertAnimation()
+                    activity!!.supportFragmentManager.beginTransaction().replace(R.id.cartContainer,otpFragment,"Fragment Open").commit()
+                }
+            }
+        )
+
     }
 
 }

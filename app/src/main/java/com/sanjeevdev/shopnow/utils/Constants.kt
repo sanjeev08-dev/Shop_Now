@@ -26,4 +26,5 @@ object Constants {
     val VERIFICATION_ID = "otp"
 
     val CUSTOMER_COLLECTION = "Customers"
+    val CART = "cart"
 }

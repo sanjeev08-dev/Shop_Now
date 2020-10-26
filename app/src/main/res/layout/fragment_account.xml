@@ -167,31 +167,57 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/dividerColor"
-                android:visibility="gone">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/customerLoginNumberET"
+                android:visibility="visible">
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp"
-                    android:background="@null"
-                    android:fontFamily="@font/ubuntu_regular"
-                    android:hint="@string/mobile_number"
-                    android:imeOptions="actionNext"
-                    android:importantForAutofill="no"
-                    android:includeFontPadding="false"
-                    android:inputType="phone"
-                    android:textColor="@color/black"
-                    android:textColorHint="@android:color/holo_blue_light"
-                    android:textSize="@dimen/_13ssp"
-                    android:padding="@dimen/_6sdp"
-                    android:layout_margin="@dimen/_6sdp" />
-                <com.google.android.material.button.MaterialButton
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="+91"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@null"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:hint="@string/name"
+                        android:importantForAutofill="no"
+                        android:includeFontPadding="false"
+                        android:textColor="@color/black"
+                        android:textColorHint="@android:color/holo_blue_light"
+                        android:textSize="@dimen/_13ssp"
+                        android:padding="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_6sdp"/>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/customerLoginNumberET"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@null"
+                        android:fontFamily="@font/ubuntu_regular"
+                        android:hint="@string/mobile_number"
+                        android:imeOptions="actionNext"
+                        android:importantForAutofill="no"
+                        android:includeFontPadding="false"
+                        android:inputType="phone"
+                        android:textColor="@color/black"
+                        android:maxLength="10"
+                        android:textColorHint="@android:color/holo_blue_light"
+                        android:textSize="@dimen/_13ssp"
+                        android:padding="@dimen/_6sdp"
+                        android:layout_marginTop="@dimen/_6sdp"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"/>
+                </LinearLayout>
+
+                <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
                     android:id="@+id/loginAccountButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/login"
-                    android:textColor="@color/white"
+                    android:text="@string/login1"
+                    app:spinning_bar_width="@dimen/_4sdp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/progress_button_background"
+                    android:paddingHorizontal="@dimen/_10sdp"
                     android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:layout_marginBottom="@dimen/_5sdp"/>
             </LinearLayout>
         </RadioGroup>
     </com.google.android.material.card.MaterialCardView>

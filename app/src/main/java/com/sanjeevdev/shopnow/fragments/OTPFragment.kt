@@ -22,6 +22,7 @@ class OTPFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_o_t_p, container, false)!!
+        view.verifyOTPButton.saveInitialState()
 
         val customerName = arguments!!.getString(Constants.CUSTOMER_NAME)!!
         val customerPhone = arguments!!.getString(Constants.CUSTOMER_PHONE)!!
@@ -38,42 +39,64 @@ class OTPFragment : Fragment() {
                 view.inputCode4.text.toString().trim().isEmpty() ||
                 view.inputCode5.text.toString().trim().isEmpty() ||
                 view.inputCode6.text.toString().trim().isEmpty()
-            ){
-                Toast.makeText(activity!!.applicationContext, "Please enter valid code", Toast.LENGTH_SHORT).show()
+            ) {
+                Toast.makeText(
+                    activity!!.applicationContext,
+                    "Please enter valid code",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
             view.verifyOTPButton.startAnimation()
-            val code = view.inputCode1.text.toString().trim()+
-                    view.inputCode2.text.toString().trim()+
-                    view.inputCode3.text.toString().trim()+
-                    view.inputCode4.text.toString().trim()+
-                    view.inputCode5.text.toString().trim()+
+            val code = view.inputCode1.text.toString().trim() +
+                    view.inputCode2.text.toString().trim() +
+                    view.inputCode3.text.toString().trim() +
+                    view.inputCode4.text.toString().trim() +
+                    view.inputCode5.text.toString().trim() +
                     view.inputCode6.text.toString().trim()
 
-            if (verificationID != null){
-                val phoneAuthCredential = PhoneAuthProvider.getCredential(verificationID,code)
-                FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential).addOnCompleteListener {
-                    if (it.isSuccessful){
-                        val customerID = FirebaseAuth.getInstance().currentUser!!.uid
-                        val map = hashMapOf(
-                            Constants.CUSTOMER_NAME to customerName,
-                            Constants.CUSTOMER_PHONE to customerPhone,
-                            Constants.CUSTOMER_EMAIL to customerEmail,
-                            Constants.CUSTOMER_ADDRESS to customerAddress,
-                            "customerID" to customerID
-                        )
-                        FirebaseFirestore.getInstance().collection(Constants.CUSTOMER_COLLECTION).document(customerID).set(map).addOnSuccessListener {
+            if (verificationID != null) {
+                val phoneAuthCredential = PhoneAuthProvider.getCredential(verificationID, code)
+                FirebaseAuth.getInstance().signInWithCredential(phoneAuthCredential)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val customerID = FirebaseAuth.getInstance().currentUser!!.uid
+                            if (!customerName.isNullOrEmpty()) {
+                                val map = hashMapOf(
+                                    Constants.CUSTOMER_NAME to customerName,
+                                    Constants.CUSTOMER_PHONE to customerPhone,
+                                    Constants.CUSTOMER_EMAIL to customerEmail,
+                                    Constants.CUSTOMER_ADDRESS to customerAddress,
+                                    "customerID" to customerID
+                                )
+                                FirebaseFirestore.getInstance()
+                                    .collection(Constants.CUSTOMER_COLLECTION)
+                                    .document(customerID).set(map).addOnSuccessListener {
+                                        view.verifyOTPButton.revertAnimation()
+                                        Toast.makeText(
+                                            activity!!.applicationContext,
+                                            "Success",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }.addOnFailureListener { exception ->
+                                        view.verifyOTPButton.revertAnimation()
+                                        Toast.makeText(
+                                            activity!!.applicationContext,
+                                            "Failed ${exception.message}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                            }
+                            activity!!.finish()
+                        } else {
                             view.verifyOTPButton.revertAnimation()
-                            Toast.makeText(activity!!.applicationContext, "Success", Toast.LENGTH_SHORT).show()
-                        }.addOnFailureListener {exception ->
-                            view.verifyOTPButton.revertAnimation()
-                            Toast.makeText(activity!!.applicationContext, "Failed ${exception.message}", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                activity!!.applicationContext,
+                                "Failed",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
-                    }else{
-                        view.verifyOTPButton.revertAnimation()
-                        Toast.makeText(activity!!.applicationContext, "Failed", Toast.LENGTH_SHORT).show()
                     }
-                }
             }
         }
         return view
@@ -126,9 +149,7 @@ class OTPFragment : Fragment() {
             }
         })
         view.inputCode4.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (s.toString().trim().isNotEmpty()) {
@@ -136,9 +157,7 @@ class OTPFragment : Fragment() {
                 }
             }
 
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
+            override fun afterTextChanged(p0: Editable?) {}
         })
         view.inputCode5.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

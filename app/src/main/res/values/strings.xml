@@ -43,5 +43,6 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
     <string name="resend_otp">RESEND OTP</string>
     <string name="verify_otp">VERIFY OTP</string>
     <string name="create_account1">Create Account</string>
+    <string name="login1">Login</string>
 
 </resources>

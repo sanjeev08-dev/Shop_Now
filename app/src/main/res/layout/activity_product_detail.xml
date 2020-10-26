@@ -76,7 +76,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ubuntu_bold"
                         android:paddingHorizontal="@dimen/_5sdp"
-                        android:text="Men's Lower"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18ssp" />
 
@@ -86,7 +85,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ubuntu_medium"
                         android:paddingHorizontal="@dimen/_5sdp"
-                        android:text="Realme"
                         android:textColor="@color/colorPrimaryDark"
                         android:textSize="@dimen/_15ssp" />
 
@@ -96,7 +94,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ubuntu_regular"
                         android:paddingHorizontal="@dimen/_5sdp"
-                        android:text="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12ssp" />
 
@@ -121,24 +118,26 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/ubuntu_medium"
                         android:paddingHorizontal="@dimen/_5sdp"
-                        android:text="999 Rs."
                         android:textColor="@color/priceColor"
                         android:textSize="@dimen/_15ssp" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <com.google.android.material.button.MaterialButton
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/addToCartButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/_5sdp"
-            android:backgroundTint="@color/cartColor"
+            android:background="@drawable/progress_button_background"
             android:text="@string/add_to_cart"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_3sdp"/>
 
-        <com.google.android.material.button.MaterialButton
+        <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/buyNowButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -146,9 +145,10 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_5sdp"
             android:layout_toEndOf="@id/addToCartButton"
-            android:backgroundTint="@color/priceColor"
+            android:background="@drawable/progress_button_background_buy"
             android:text="@string/buy_now"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_3sdp"/>
     </RelativeLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
