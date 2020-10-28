@@ -5,4 +5,5 @@ import com.sanjeevdev.shopnow.data.ProductList
 
 interface ProductListener {
     fun clickProduct(productList: ProductList, view: View)
+    fun longClickProduct(productList: ProductList, view: View)
 }

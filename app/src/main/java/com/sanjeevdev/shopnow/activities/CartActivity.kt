@@ -93,6 +93,10 @@ class CartActivity : AppCompatActivity() {
         }
 
         override fun clickProduct(productList: ProductList, view: View) {
+            Toast.makeText(applicationContext, "Open Buy Activity for buy ${productList.name}", Toast.LENGTH_SHORT).show()
+        }
+
+        override fun longClickProduct(productList: ProductList, view: View) {
             val snackbar =
                 Snackbar.make(view, "Do you want to remove ${productList.name} from cart", 3000)
                     .setAction(

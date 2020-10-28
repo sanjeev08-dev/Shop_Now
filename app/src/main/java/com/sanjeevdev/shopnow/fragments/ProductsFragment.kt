@@ -85,6 +85,10 @@ class ProductsFragment : Fragment() {
             startActivity(intent)
         }
 
+        override fun longClickProduct(productList: ProductList, view: View) {
+
+        }
+
     }
 
 }

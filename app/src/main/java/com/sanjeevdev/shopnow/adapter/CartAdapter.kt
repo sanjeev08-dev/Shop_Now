@@ -3,8 +3,10 @@ package com.sanjeevdev.shopnow.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import com.sanjeevdev.shopnow.R
 import com.sanjeevdev.shopnow.data.ProductList
 import com.sanjeevdev.shopnow.listeners.ProductListener
@@ -24,8 +26,11 @@ class CartAdapter(
             view.productCartPrice.text = productCartList.price
 
             view.productCartCard.setOnLongClickListener {
-                listener.clickProduct(productCartList,it)
+                listener.longClickProduct(productCartList,it)
                 return@setOnLongClickListener true
+            }
+            view.productCartCard.setOnClickListener {
+                listener.clickProduct(productCartList,it)
             }
         }
 
