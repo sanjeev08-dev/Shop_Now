@@ -98,6 +98,6 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     fun imageClick(view: View) {
-        Toast.makeText(applicationContext, "Open Cart", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(this,CartActivity::class.java))
     }
 }

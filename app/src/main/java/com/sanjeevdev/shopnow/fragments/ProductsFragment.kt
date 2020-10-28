@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
@@ -80,7 +79,7 @@ class ProductsFragment : Fragment() {
             return emptyList()
         }
 
-        override fun clickProduct(productList: ProductList) {
+        override fun clickProduct(productList: ProductList, view: View) {
             val intent = Intent(activity!!, ProductDetailActivity::class.java)
             intent.putExtra(Constants.PRODUCTID,productList.productID)
             startActivity(intent)

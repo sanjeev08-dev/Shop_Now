@@ -27,7 +27,7 @@ class ProductsAdapter(val productList: List<ProductList>, val productListener: P
             description.text = productList.description
             price.text = productList.price
             card.setOnClickListener {
-                productListener.clickProduct(productList)
+                productListener.clickProduct(productList, it)
             }
         }
 

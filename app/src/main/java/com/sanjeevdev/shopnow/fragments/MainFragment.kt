@@ -99,7 +99,7 @@ class MainFragment : Fragment() {
             return emptyList()
         }
 
-        override fun clickProduct(productList: ProductList) {
+        override fun clickProduct(productList: ProductList, view: View) {
             val intent = Intent(activity!!,ProductDetailActivity::class.java)
             intent.putExtra(Constants.PRODUCTID,productList.productID)
             startActivity(intent)
