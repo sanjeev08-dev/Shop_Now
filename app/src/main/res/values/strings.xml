@@ -45,5 +45,6 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
     <string name="create_account1">Create Account</string>
     <string name="login1">Login</string>
     <string name="no_product_is_available_in_your_cart">No Product is available in your cart</string>
+    <string name="end_of_the_cart_items">End of the cart items</string>
 
 </resources>
