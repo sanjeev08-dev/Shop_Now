@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sanjeevdev.shopnow.R
+import com.sanjeevdev.shopnow.fragments.CartFragment
 import com.sanjeevdev.shopnow.fragments.MainFragment
 import com.sanjeevdev.shopnow.fragments.ProductsFragment
 import com.sanjeevdev.shopnow.utils.Constants
@@ -61,6 +62,12 @@ class MainActivity : AppCompatActivity() {
                             )
                         )
                     }
+                    menuItems.add(
+                        com.shrikanthravi.customnavigationdrawer2.data.MenuItem(
+                            Constants.CART_CAPS,
+                            R.drawable.clothpic
+                        )
+                    )
 
                     navigationDrawer.menuItemList = menuItems
                     navigationDrawer.setOnMenuItemClickListener { it ->
@@ -81,6 +88,11 @@ class MainActivity : AppCompatActivity() {
                             supportFragmentManager.beginTransaction().replace(
                                 R.id.fragment_container,
                                 productsFragment
+                            ).commit()
+                        }else if(menuTitle == Constants.CART_CAPS){
+                            supportFragmentManager.beginTransaction().replace(
+                                R.id.fragment_container,
+                                CartFragment()
                             ).commit()
                         }
                     }

@@ -1,57 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context=".activities.CartActivity">
+    tools:context=".activities.CartActivity"
+    android:id="@+id/cartContainer">
 
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cartRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="@dimen/_40sdp"
-                android:scrollbars="vertical"
-                android:visibility="visible" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/end_of_the_cart_items"
-                android:textSize="@dimen/_10ssp"
-                android:textColor="@android:color/white"
-                android:fontFamily="@font/ubuntu_medium"
-                android:padding="@dimen/_5sdp"/>
-        </LinearLayout>
-
-    </androidx.core.widget.NestedScrollView>
-
-    <TextView
-        android:id="@+id/noProductAvailableTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:fontFamily="@font/ubuntu_medium"
-        android:text="@string/no_product_is_available_in_your_cart"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/_16ssp"
-        android:visibility="gone" />
-    <TextView
-        android:id="@+id/cart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_10sdp"
-        android:fontFamily="@font/ubuntu_bold"
-        android:text="@string/cart"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_18ssp"
-        android:layout_alignParentTop="true"
-        android:background="@drawable/appbar_background"/>
-</RelativeLayout>
+</FrameLayout>

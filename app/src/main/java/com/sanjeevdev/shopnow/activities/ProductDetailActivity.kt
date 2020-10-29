@@ -53,6 +53,12 @@ class ProductDetailActivity : AppCompatActivity() {
                     }
             }
         }
+        buyNowButton.setOnClickListener {
+            val productID = intent.getStringExtra(Constants.PRODUCTID)!!
+            val intent = Intent(this,BuyProductActivity::class.java)
+            intent.putExtra(Constants.PRODUCTID,productID)
+            startActivity(intent)
+        }
     }
 
     inner class GetDataAsynTask : AsyncTask<FirebaseFirestore, Int, List<String>>() {

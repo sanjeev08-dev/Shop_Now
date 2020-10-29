@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".activities.BuyProductActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/buyProductImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                app:riv_corner_radius="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/buyProductName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buyProductImage"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/ubuntu_medium"
+                android:text="Realme 1"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_16ssp" />
+
+            <TextView
+                android:id="@+id/buyProductBrandName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buyProductName"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:text="Sold by Realme"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:id="@+id/buyProductSelectQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buyProductBrandName"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:text="Select Quantity"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp" />
+
+            <it.sephiroth.android.library.numberpicker.NumberPicker
+                android:id="@+id/buyProductQuantity"
+                style="@style/NumberPicker.Outlined"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buyProductSelectQuantity"
+                android:layout_margin="@dimen/_10sdp"
+                android:progress="1"
+                app:picker_disableGestures="false"
+                app:picker_min="1"
+                app:picker_orientation="vertical"
+                app:picker_stepSize="1"
+                app:picker_tracker="exponential" />
+
+            <TextView
+                android:id="@+id/buyProductPriceText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buyProductQuantity"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:text="Price"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp" />
+            <TextView
+                android:id="@+id/buyProductPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/buyProductPriceText"
+                android:layout_below="@id/buyProductQuantity"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/ubuntu_medium"
+                android:textColor="@color/cartColor"
+                android:textSize="@dimen/_12ssp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/buyProductPrice"
+                android:layout_below="@id/buyProductQuantity"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/ubuntu_medium"
+                android:textColor="@color/cartColor"
+                android:textSize="@dimen/_12ssp"
+                android:text="Rs."/>
+
+            <TextView
+                android:id="@+id/buyProductSelectColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buyProductPrice"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:text="Select Color"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/buyProductColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buyProductSelectColor"
+                android:layout_margin="@dimen/_10sdp" />
+
+            <TextView
+                android:id="@+id/buyProductSelectAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buyProductColor"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/ubuntu_regular"
+                android:text="To Deliver"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/_12ssp" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/buyProductAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buyProductSelectAddress"
+                android:layout_margin="@dimen/_10sdp"
+                android:fontFamily="@font/ubuntu_medium"
+                android:textColor="@android:color/white" />
+
+            <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
+                android:id="@+id/buyNow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/buyProductAddress"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="@dimen/_10sdp"
+                android:background="@drawable/progress_button_background"
+                android:text="@string/buy_now" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

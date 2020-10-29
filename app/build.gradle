@@ -88,4 +88,6 @@ dependencies {
     implementation 'br.com.simplepass:loading-button-android:2.2.0'
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    implementation 'com.github.sephiroth74:NumberSlidingPicker:1.0.3'
 }

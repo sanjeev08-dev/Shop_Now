@@ -13,4 +13,12 @@
         android:layout_height="@dimen/_30sdp"
         android:layout_centerInParent="true"
         android:src="@drawable/color_bg"/>
+    <ImageView
+        android:id="@+id/detailProductColorSelected"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_done_color"
+        android:background="@null"
+        android:visibility="gone"/>
 </RelativeLayout>
