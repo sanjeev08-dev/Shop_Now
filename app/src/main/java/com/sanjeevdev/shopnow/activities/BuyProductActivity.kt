@@ -12,10 +12,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sanjeevdev.shopnow.R
 import com.sanjeevdev.shopnow.adapter.ProductBuyColorAdapter
+import com.sanjeevdev.shopnow.data.ColorsList
 import com.sanjeevdev.shopnow.listeners.ColorListener
 import com.sanjeevdev.shopnow.utils.Constants
 import it.sephiroth.android.library.numberpicker.doOnProgressChanged
 import kotlinx.android.synthetic.main.activity_buy_product.*
+import java.text.FieldPosition
 
 class BuyProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +49,6 @@ class BuyProductActivity : AppCompatActivity() {
                     buyProductQuantity.doOnProgressChanged { numberPicker, progress, formUser ->
                         buyProductPrice.text = "${progress*price}"
                     }
-
                     val imageList = it.result!!.get(Constants.IMAGE_URL) as List<String>
                     val colorsList = it.result!!.get(Constants.COLORS) as List<String>
 

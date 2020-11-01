@@ -1,5 +1,7 @@
 package com.sanjeevdev.shopnow.utils
 
+import com.sanjeevdev.shopnow.data.ColorsList
+
 object Constants {
     val ROOT_COLLECTION = "Shop Now"
     val BANNERS ="Banners"
@@ -28,4 +30,6 @@ object Constants {
     val CUSTOMER_COLLECTION = "Customers"
     val CART = "cart"
     val CART_CAPS = "Cart"
+
+    var currentItem : ColorsList = ColorsList("",false)
 }

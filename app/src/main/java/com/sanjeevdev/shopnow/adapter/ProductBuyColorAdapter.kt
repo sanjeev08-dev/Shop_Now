@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.sanjeevdev.shopnow.R
@@ -26,7 +27,7 @@ class ProductBuyColorAdapter(
                 colorImage,
                 ColorStateList.valueOf(Color.parseColor(colorCode))
             )
-            var isSelection = true
+            var isSelection = false
             colorImage.setOnClickListener {
                 if (!isSelection) {
                     view.detailProductColorSelected.visibility = View.VISIBLE
