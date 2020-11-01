@@ -30,6 +30,4 @@ object Constants {
     val CUSTOMER_COLLECTION = "Customers"
     val CART = "cart"
     val CART_CAPS = "Cart"
-
-    var currentItem : ColorsList = ColorsList("",false)
 }
