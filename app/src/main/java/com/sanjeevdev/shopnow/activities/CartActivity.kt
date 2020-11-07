@@ -30,6 +30,4 @@ class CartActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction().replace(R.id.cartContainer,CartFragment()).commit()
     }
-
-
 }

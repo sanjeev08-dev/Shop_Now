@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.sanjeevdev.shopnow.R
@@ -20,23 +19,25 @@ class ProductBuyColorAdapter(
     val listener: ColorListener
 ) : RecyclerView.Adapter<ProductBuyColorAdapter.ProductBuyColorAdapterVH>() {
 
-    class ProductBuyColorAdapterVH(val view: View) : RecyclerView.ViewHolder(view) {
+    var lastSelectedPosition = -1;
+
+    inner class ProductBuyColorAdapterVH(val view: View) : RecyclerView.ViewHolder(view) {
         private val colorImage = view.findViewById<ImageView>(R.id.detailProductColor)!!
         fun setData(colorCode: String, context: Context, listener: ColorListener, position: Int) {
+            if (lastSelectedPosition == position) {
+                view.detailProductColorSelected.visibility = View.VISIBLE
+            } else {
+                view.detailProductColorSelected.visibility = View.GONE
+            }
             ImageViewCompat.setImageTintList(
                 colorImage,
                 ColorStateList.valueOf(Color.parseColor(colorCode))
             )
-            var isSelection = false
             colorImage.setOnClickListener {
-                if (!isSelection) {
-                    view.detailProductColorSelected.visibility = View.VISIBLE
-                    listener.selectColor(colorCode, it)
-                    isSelection = true
-                }else{
-                    view.detailProductColorSelected.visibility = View.GONE
-                    isSelection = false
-                }
+                lastSelectedPosition = adapterPosition
+                notifyDataSetChanged()
+                listener.selectColor(colorCode, it)
+
             }
         }
 

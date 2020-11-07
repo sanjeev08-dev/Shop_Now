@@ -18,8 +18,7 @@ object Constants {
     val QUANTITY = "quantity"
     val CATEGORY = "category"
     val MENU_ITEM = "menuItem"
-
-    val HAS_ACCOUNT = "hasAccount"
+    val TOTAL_PRICE = "totalPrice"
 
     val CUSTOMER_NAME = "customerName"
     val CUSTOMER_PHONE = "customerPhone"
@@ -30,4 +29,6 @@ object Constants {
     val CUSTOMER_COLLECTION = "Customers"
     val CART = "cart"
     val CART_CAPS = "Cart"
+
+    val ORDERS = "Orders"
 }

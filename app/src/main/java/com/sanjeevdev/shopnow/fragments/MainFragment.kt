@@ -3,6 +3,7 @@ package com.sanjeevdev.shopnow.fragments
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,6 +61,7 @@ class MainFragment : Fragment() {
                         "Banners loading failed",
                         Toast.LENGTH_SHORT
                     ).show()
+                    Log.e("Error",it.message.toString())
                 }
             val productList = arrayListOf<ProductList>()
             val productAdapter = ProductsAdapter(productList, this)

@@ -1,11 +1,9 @@
 package com.sanjeevdev.shopnow.activities
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +25,8 @@ class ProductDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_detail)
+        buyNowButton.saveInitialState()
+        addToCartButton.saveInitialState()
 
 
         val db = FirebaseFirestore.getInstance()
@@ -35,29 +35,47 @@ class ProductDetailActivity : AppCompatActivity() {
         getDataAsynTask.execute(db)
 
         addToCartButton.setOnClickListener {
-            if (FirebaseAuth.getInstance().currentUser == null){
-                startActivity(Intent(this,AccountActivity::class.java))
-            }else{
+            if (FirebaseAuth.getInstance().currentUser == null) {
+                startActivity(Intent(this, AccountActivity::class.java))
+                finish()
+            } else {
                 addToCartButton.startAnimation()
                 val userID = FirebaseAuth.getInstance().currentUser!!.uid
-                FirebaseFirestore.getInstance().collection(Constants.CUSTOMER_COLLECTION).document(userID).update(Constants.CART,FieldValue.arrayUnion(intent.getStringExtra(Constants.PRODUCTID)!!))
+                FirebaseFirestore.getInstance().collection(Constants.CUSTOMER_COLLECTION)
+                    .document(userID).update(
+                        Constants.CART,
+                        FieldValue.arrayUnion(intent.getStringExtra(Constants.PRODUCTID)!!)
+                    )
                     .addOnSuccessListener {
-                        Toast.makeText(applicationContext, "Added to cart", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(applicationContext, "Added to cart", Toast.LENGTH_SHORT)
+                            .show()
                         addToCartButton.revertAnimation()
-                        addToCartButton.background = ContextCompat.getDrawable(applicationContext,R.drawable.progress_button_background)
+                        addToCartButton.background = ContextCompat.getDrawable(
+                            applicationContext,
+                            R.drawable.progress_button_background
+                        )
                     }
                     .addOnFailureListener {
                         Toast.makeText(applicationContext, it.message, Toast.LENGTH_SHORT).show()
                         addToCartButton.revertAnimation()
-                        addToCartButton.background = ContextCompat.getDrawable(applicationContext,R.drawable.progress_button_background)
+                        addToCartButton.background = ContextCompat.getDrawable(
+                            applicationContext,
+                            R.drawable.progress_button_background
+                        )
                     }
             }
         }
         buyNowButton.setOnClickListener {
-            val productID = intent.getStringExtra(Constants.PRODUCTID)!!
-            val intent = Intent(this,BuyProductActivity::class.java)
-            intent.putExtra(Constants.PRODUCTID,productID)
-            startActivity(intent)
+            if (FirebaseAuth.getInstance().currentUser == null) {
+                startActivity(Intent(this, AccountActivity::class.java))
+                finish()
+            } else {
+                val productID = intent.getStringExtra(Constants.PRODUCTID)!!
+                val intent = Intent(this, BuyProductActivity::class.java)
+                intent.putExtra(Constants.PRODUCTID, productID)
+                startActivity(intent)
+                finish()
+            }
         }
     }
 
@@ -72,11 +90,11 @@ class ProductDetailActivity : AppCompatActivity() {
                     detailProductDescription.text = it.result!!.get(Constants.DESCRIPTION) as String
                     val price = it.result!!.get(Constants.PRICE) as String
                     val quantity = it.result!!.get(Constants.QUANTITY).toString().toInt()
-                    if (quantity == 0){
+                    if (quantity == 0) {
                         detailProductPrice.text = "Out Of Stock"
                         addToCartButton.visibility = View.GONE
                         buyNowButton.visibility = View.GONE
-                    }else{
+                    } else {
                         detailProductPrice.text = "$price Rs."
                     }
                     val imageList = it.result!!.get(Constants.IMAGE_URL) as List<String>
@@ -104,6 +122,7 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     fun imageClick(view: View) {
-        startActivity(Intent(this,CartActivity::class.java))
+        startActivity(Intent(this, CartActivity::class.java))
+        finish()
     }
 }
