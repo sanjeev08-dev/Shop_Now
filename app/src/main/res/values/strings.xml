@@ -5,16 +5,15 @@
 
     <string name="home_accesseries_title">Home Accessories</string>
     <string name="home_accesseries_middle">Easy to find home materials</string>
-    <string name="home_accesseries_discription">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</string>
+    <string name="home_accesseries_discription">Writing is an art but also a craft, which means it\'s a job. I don\'t teach. This is how the groceries get on the table. You sometimes make creative sacrifices to get the job done. All that said, I\'m looking forward to getting out of the two-book-a-year schedule I\'m on and to getting some self-indulgence going." ~ Charlie Huston</string>
 
     <string name="cloths_accesseries_title">Cloths</string>
     <string name="cloths_accesseries_middle">What is your style</string>
-    <string name="cloths_accesseries_discription">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</string>
+    <string name="cloths_accesseries_discription">What you wear is how you present yourself to the world, especially today, when human contacts are so quick. Fashion is instant language.</string>
 
     <string name="mobile_accesseries_title">Mobile Accessories</string>
     <string name="mobile_accesseries_middle">Need new phone, don\'t worry</string>
-    <string name="mobile_accesseries_discription">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et</string>
+    <string name="mobile_accesseries_discription">Once you have an innovation culture, even those who are not scientists or engineers- poets, actors, journalists- they, as communities, embrace the concept of an innovation culture. They vote in ways that promote it. They don’t fight science and they don\’t fight technology</string>
 
     <string name="start">Start</string>
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
@@ -46,5 +45,8 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
     <string name="login1">Login</string>
     <string name="no_product_is_available_in_your_cart">No Product is available in your cart</string>
     <string name="end_of_the_cart_items">End of the cart items</string>
+    <string name="orders">Orders</string>
+    <string name="you_have_not_order_any_product_yet">You have not order any product yet</string>
+    <string name="selected_color">Selected Color</string>
 
 </resources>

@@ -31,4 +31,7 @@ object Constants {
     val CART_CAPS = "Cart"
 
     val ORDERS = "Orders"
+    val ORDER_DATE = "ordersDate"
+
+    val IS_NOT_FIRST = "isNotFirst"
 }

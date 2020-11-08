@@ -13,14 +13,14 @@ class SplashActivity : AwesomeSplash() {
 
         //Customize Circular Reveal
         configSplash?.backgroundColor = R.color.colorPrimary //any color you want form colors.xml
-        configSplash?.animCircularRevealDuration = 2000 //int ms
+        configSplash?.animCircularRevealDuration = 1500 //int ms
         configSplash?.revealFlagX = Flags.REVEAL_RIGHT  //or Flags.REVEAL_LEFT
         configSplash?.revealFlagY = Flags.REVEAL_BOTTOM //or Flags.REVEAL_TOP
         //Choose LOGO OR PATH if you don't provide String value for path it's logo by default
 
         //Customize Logo
         configSplash?.logoSplash = R.drawable.shopicon //or any other drawable
-        configSplash?.animLogoSplashDuration = 2000 //int ms
+        configSplash?.animLogoSplashDuration = 1000 //int ms
         configSplash?.animLogoSplashTechnique =
             Techniques.FadeInDown //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
 
@@ -28,7 +28,7 @@ class SplashActivity : AwesomeSplash() {
         configSplash?.titleSplash = "Shop Now"
         configSplash?.titleTextColor = R.color.white
         configSplash?.titleTextSize = 30f //float value
-        configSplash?.animTitleDuration = 2000
+        configSplash?.animTitleDuration = 1000
         configSplash?.animTitleTechnique = Techniques.SlideInRight
         configSplash?.titleFont =
             "fonts/ubuntu_bold.ttf" //provide string to your font located in assets/fonts/

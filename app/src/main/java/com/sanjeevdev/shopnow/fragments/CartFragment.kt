@@ -51,10 +51,12 @@ class CartFragment : Fragment(), ProductListener {
     }
 
     private fun getCartProducts(db: FirebaseFirestore?) {
+        val view = requireView()
+        val activity = requireActivity()
         val productCartList = arrayListOf<ProductList>()
         val cartAdaptor = CartAdapter(productCartList, this)
-        val cartRecyclerView = view!!.findViewById<RecyclerView>(R.id.cartRecyclerView).apply {
-            layoutManager = LinearLayoutManager(activity!!.applicationContext)
+        val cartRecyclerView = view.findViewById<RecyclerView>(R.id.cartRecyclerView).apply {
+            layoutManager = LinearLayoutManager(activity.applicationContext)
             setHasFixedSize(true)
             adapter = cartAdaptor
         }
@@ -66,7 +68,7 @@ class CartFragment : Fragment(), ProductListener {
 
                 if (cartItems.isEmpty()) {
                     cartRecyclerView.visibility = View.GONE
-                    view!!.noProductAvailableTV.visibility = View.VISIBLE
+                    view.noProductAvailableTV.visibility = View.VISIBLE
                     productCartList.clear()
                     cartAdaptor.notifyDataSetChanged()
                 } else {
@@ -104,12 +106,15 @@ class CartFragment : Fragment(), ProductListener {
     }
 
     override fun clickProduct(productList: ProductList, view: View) {
-        val intent = Intent(activity!!.applicationContext, BuyProductActivity::class.java)
+        val activity = requireActivity()
+        val intent = Intent(activity.applicationContext, BuyProductActivity::class.java)
         intent.putExtra(Constants.PRODUCTID, productList.productID)
         startActivity(intent)
     }
 
     override fun longClickProduct(productList: ProductList, view: View) {
+        val view = requireView()
+        val activity = requireActivity()
         val snackbar =
             Snackbar.make(view, "Do you want to remove ${productList.name} from cart", 3000)
                 .setAction(
@@ -121,7 +126,7 @@ class CartFragment : Fragment(), ProductListener {
                             FieldValue.arrayRemove(productList.productID)
                         ).addOnSuccessListener {
                             Toast.makeText(
-                                activity!!.applicationContext,
+                                activity.applicationContext,
                                 "Product removed from cart",
                                 Toast.LENGTH_SHORT
                             ).show()
@@ -129,7 +134,7 @@ class CartFragment : Fragment(), ProductListener {
                         }
                         .addOnFailureListener {
                             Toast.makeText(
-                                activity!!.applicationContext,
+                                activity.applicationContext,
                                 "Error ${it.message}",
                                 Toast.LENGTH_SHORT
                             ).show()
@@ -137,7 +142,7 @@ class CartFragment : Fragment(), ProductListener {
                 }
         snackbar.setActionTextColor(Color.parseColor("#FF3030"))
         snackbar.view.background =
-            ContextCompat.getDrawable(activity!!.applicationContext, R.color.white)
+            ContextCompat.getDrawable(activity.applicationContext, R.color.white)
         val textView =
             snackbar.view.findViewById(com.google.android.material.R.id.snackbar_text) as TextView
         textView.setTextColor(Color.BLUE)

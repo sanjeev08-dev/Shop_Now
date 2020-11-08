@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.preference.PreferenceManager
 import androidx.viewpager2.widget.ViewPager2
-import com.google.firebase.firestore.FirebaseFirestore
 import com.sanjeevdev.shopnow.R
 import com.sanjeevdev.shopnow.adapter.OnboardingAdapter
 import com.sanjeevdev.shopnow.data.OnboardingItem
@@ -20,6 +20,12 @@ class OnBoardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_on_boarding)
+
+        val sharedPreferences = PreferenceManager.getDefaultSharedPreferences(applicationContext)
+        if (sharedPreferences.getBoolean(Constants.IS_NOT_FIRST,false)){
+            startActivity(Intent(applicationContext, MainActivity::class.java))
+            finish()
+        }
 
         setupOnBoardingItem()
         onBoardingViewPager.adapter = onboardingAdapter
@@ -38,11 +44,22 @@ class OnBoardingActivity : AppCompatActivity() {
             if (onBoardingViewPager.currentItem + 1 < onboardingAdapter.itemCount) {
                 onBoardingViewPager.setCurrentItem(onBoardingViewPager.currentItem + 1)
             } else {
+                val editor = sharedPreferences.edit()
+                editor.apply {
+                    putBoolean(Constants.IS_NOT_FIRST,true)
+                }
+                editor.apply()
+
                 startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
             }
         }
         skipButton.setOnClickListener {
+            val editor = sharedPreferences.edit()
+            editor.apply {
+                putBoolean(Constants.IS_NOT_FIRST,true)
+            }
+            editor.apply()
             startActivity(Intent(applicationContext, MainActivity::class.java))
             finish()
         }

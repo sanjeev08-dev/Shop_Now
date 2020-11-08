@@ -27,8 +27,6 @@ class ProductDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_product_detail)
         buyNowButton.saveInitialState()
         addToCartButton.saveInitialState()
-
-
         val db = FirebaseFirestore.getInstance()
 
         val getDataAsynTask = GetDataAsynTask()
@@ -122,7 +120,11 @@ class ProductDetailActivity : AppCompatActivity() {
     }
 
     fun imageClick(view: View) {
-        startActivity(Intent(this, CartActivity::class.java))
-        finish()
+        if (FirebaseAuth.getInstance().currentUser == null) {
+            startActivity(Intent(this, AccountActivity::class.java))
+        } else {
+            startActivity(Intent(this, CartActivity::class.java))
+            finish()
+        }
     }
 }
