@@ -48,5 +48,6 @@
     <string name="orders">Orders</string>
     <string name="you_have_not_order_any_product_yet">You have not order any product yet</string>
     <string name="selected_color">Selected Color</string>
+    <string name="share_now">Share Now</string>
 
 </resources>

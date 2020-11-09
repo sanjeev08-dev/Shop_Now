@@ -2,16 +2,27 @@ package com.sanjeevdev.shopnow.activities
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.AsyncTask
 import android.os.Bundle
+import android.os.Environment
+import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.journeyapps.barcodescanner.BarcodeEncoder
+import com.makeramen.roundedimageview.RoundedImageView
+import com.sanjeevdev.shopnow.BuildConfig
 import com.sanjeevdev.shopnow.R
 import com.sanjeevdev.shopnow.adapter.ImagesAdapter
 import com.sanjeevdev.shopnow.adapter.ProductColorAdapter
@@ -20,6 +31,8 @@ import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnima
 import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 import kotlinx.android.synthetic.main.activity_product_detail.*
+import java.io.File
+import java.io.FileOutputStream
 
 class ProductDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,10 +127,84 @@ class ProductDetailActivity : AppCompatActivity() {
                     productColorAdapter.notifyDataSetChanged()
 
                 }
+
+            shareButton.setOnClickListener {
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(
+                            arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                            10
+                        )
+                    } else {
+                        saveQR(productID)
+                    }
+                } else {
+                    saveQR(productID)
+                }
+
+            }
             return emptyList()
         }
 
     }
+
+    private fun saveQR(productID: String) {
+        val writer = MultiFormatWriter()
+        try {
+            val bitMatrix = writer.encode(productID, BarcodeFormat.QR_CODE, 250, 250)
+            detailProductQRCode.setImageBitmap(BarcodeEncoder().createBitmap(bitMatrix))
+        } catch (e: Exception) {
+            Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT).show()
+        }
+        detailProductQRCode.buildDrawingCache()
+        val bitmap = detailProductQRCode.drawingCache!!
+        try {
+            val cachePath =
+                File(Environment.getExternalStorageDirectory().absolutePath + "/Android/data/com.sanjeevdev.shopnow.activities")
+            cachePath.mkdirs()
+            val stream = FileOutputStream("$cachePath/QRCodeImage.png")
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+            stream.close()
+        } catch (e: Exception) {
+            Log.e("H", e.localizedMessage)
+            Toast.makeText(applicationContext, e.localizedMessage, Toast.LENGTH_SHORT).show()
+        }
+        val imagePath =
+            File(Environment.getExternalStorageDirectory().absolutePath + "/Android/data/com.sanjeevdev.shopnow.activities")
+        val filePath = File(imagePath, "/QRCodeImage.png")
+        val contentUri = FileProvider.getUriForFile(
+            applicationContext,
+            BuildConfig.APPLICATION_ID + ".provider", filePath
+        );
+        if (contentUri != null) {
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND;
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // temp permission for receiving app to read this file
+            shareIntent.setDataAndType(contentUri, contentResolver.getType(contentUri));
+            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            shareIntent.putExtra(
+                Intent.EXTRA_TEXT,
+                "Download ShowNow app from below link\nwww.shopnowapp.com \nAnd Scan this code for view Item \nGood Luck\nDeveloper - Sanjeev Kumar"
+            )
+            shareIntent.type = "image/png";
+            startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == 10 && grantResults.isEmpty() && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(applicationContext, "Permission denied WRITE", Toast.LENGTH_SHORT).show()
+        } else {
+            saveQR(intent.getStringExtra(Constants.PRODUCTID)!!)
+        }
+    }
+
 
     fun imageClick(view: View) {
         if (FirebaseAuth.getInstance().currentUser == null) {

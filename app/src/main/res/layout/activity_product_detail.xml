@@ -11,6 +11,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/detailProductQRCode"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_250sdp"
+            android:layout_gravity="center"
+            android:elevation="@dimen/_minus56sdp"
+            android:visibility="invisible"
+            app:riv_corner_radius="@dimen/_10sdp" />
+
         <ImageView
             android:id="@+id/cartImage"
             android:layout_width="@dimen/_25ssp"
@@ -101,26 +110,56 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/colors"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/ubuntu_medium"
-                        android:textColor="@color/cartColor"
-                        android:textSize="@dimen/_12ssp"
                         android:paddingHorizontal="@dimen/_5sdp"
-                        android:layout_marginTop="@dimen/_5sdp"/>
+                        android:text="@string/colors"
+                        android:textColor="@color/cartColor"
+                        android:textSize="@dimen/_12ssp" />
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/detailProductColorsRecyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/_5sdp"/>
+                        android:layout_marginVertical="@dimen/_5sdp" />
 
                     <TextView
                         android:id="@+id/detailProductPrice"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/ubuntu_medium"
                         android:paddingHorizontal="@dimen/_5sdp"
                         android:textColor="@color/priceColor"
                         android:textSize="@dimen/_15ssp" />
+
+                    <LinearLayout
+                        android:id="@+id/shareButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@drawable/share_button_bg"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/_5sdp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/ubuntu_medium"
+                            android:text="@string/share_now"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_16ssp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/_5sdp"
+                            android:scaleX="-1"
+                            android:src="@drawable/ic_share" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
@@ -131,12 +170,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/_5sdp"
-            android:background="@drawable/progress_button_background"
-            android:text="@string/add_to_cart"
-            android:textColor="@color/white"
             android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:background="@drawable/progress_button_background"
             android:paddingHorizontal="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_3sdp"/>
+            android:text="@string/add_to_cart"
+            android:textColor="@color/white" />
 
         <br.com.simplepass.loadingbutton.customViews.CircularProgressButton
             android:id="@+id/buyNowButton"
@@ -145,11 +184,11 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="@dimen/_5sdp"
             android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
             android:layout_toEndOf="@id/addToCartButton"
             android:background="@drawable/progress_button_background_buy"
-            android:text="@string/buy_now"
-            android:textColor="@color/white"
             android:paddingHorizontal="@dimen/_10sdp"
-            android:layout_marginBottom="@dimen/_3sdp"/>
+            android:text="@string/buy_now"
+            android:textColor="@color/white" />
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
