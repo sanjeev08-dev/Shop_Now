@@ -7,10 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sanjeevdev.shopnow.R
-import com.sanjeevdev.shopnow.fragments.CartFragment
-import com.sanjeevdev.shopnow.fragments.MainFragment
-import com.sanjeevdev.shopnow.fragments.OrdersFragment
-import com.sanjeevdev.shopnow.fragments.ProductsFragment
+import com.sanjeevdev.shopnow.fragments.*
 import com.sanjeevdev.shopnow.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -78,6 +75,13 @@ class MainActivity : AppCompatActivity() {
                             )
                         )
                     }
+                    menuItems.add(
+                        com.shrikanthravi.customnavigationdrawer2.data.MenuItem(
+                            Constants.QR_SCANNER,
+                            R.drawable.clothpic
+                        )
+                    )
+
                     navigationDrawer.menuItemList = menuItems
                     navigationDrawer.setOnMenuItemClickListener { it ->
                         val menuTitle = navigationDrawer.menuItemList.get(it).title
@@ -107,6 +111,11 @@ class MainActivity : AppCompatActivity() {
                             supportFragmentManager.beginTransaction().replace(
                                 R.id.fragment_container,
                                 OrdersFragment()
+                            ).commit()
+                        } else if (menuTitle == Constants.QR_SCANNER) {
+                            supportFragmentManager.beginTransaction().replace(
+                                R.id.fragment_container,
+                                QRScannerFragment()
                             ).commit()
                         }
                     }

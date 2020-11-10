@@ -34,4 +34,5 @@ object Constants {
     val ORDER_DATE = "ordersDate"
 
     val IS_NOT_FIRST = "isNotFirst"
+    val QR_SCANNER = "Scanner"
 }

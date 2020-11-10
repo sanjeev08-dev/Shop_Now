@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.QRScannerFragment"
+    android:background="@color/colorPrimary">
+
+    <me.dm7.barcodescanner.zxing.ZXingScannerView
+        android:id="@+id/scanner"
+        android:layout_width="@dimen/_300sdp"
+        android:layout_height="@dimen/_300sdp"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_centerHorizontal="true"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/reScanButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:elevation="@dimen/_10sdp"
+        app:backgroundTint="@color/cartColor"
+        android:src="@drawable/ic_refresh"
+        android:visibility="gone"
+        android:layout_alignBottom="@id/scanner"
+        android:layout_alignStart="@id/scanner"
+        android:layout_margin="@dimen/_10sdp"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/flashButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:elevation="@dimen/_10sdp"
+        app:backgroundTint="@color/cartColor"
+        android:src="@drawable/ic_flash_on"
+        android:layout_alignBottom="@id/scanner"
+        android:layout_alignEnd="@id/scanner"
+        android:layout_margin="@dimen/_10sdp"/>
+
+    <TextView
+        android:id="@+id/errorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scanner"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:fontFamily="@font/ubuntu_regular"
+        android:textColor="@color/white"/>
+</RelativeLayout>
